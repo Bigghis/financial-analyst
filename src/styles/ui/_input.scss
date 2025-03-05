@@ -1,0 +1,68 @@
+@use "sass:map";
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    
+    label {
+      color: map.get($colors, 'dark', 'text-secondary');
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .light-theme & {
+        color: map.get($colors, 'light', 'text-secondary');
+      }
+    }
+
+    .value-input {
+        max-width: 200px;
+        padding: 0.5rem;
+        border: 1px solid map.get($colors, 'dark', 'border');
+        border-radius: 4px;
+        background: map.get($colors, 'dark', 'bg-secondary');
+        color: map.get($colors, 'dark', 'text');
+        appearance: textfield;
+        
+        &:focus {
+          outline: none;
+          border-color: map.get($colors, 'dark', 'primary');
+        }
+    
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+    
+        -moz-appearance: textfield;
+    
+        .light-theme & {
+          border-color: map.get($colors, 'light', 'border');
+          background: map.get($colors, 'light', 'bg-secondary');
+          color: map.get($colors, 'light', 'text');
+          
+          &:focus {
+            border-color: map.get($colors, 'light', 'primary');
+          }
+        }
+    
+        &.error-validation {
+          border-color: map.get($colors, 'dark', 'error');
+          
+          &:focus {
+            border-color: map.get($colors, 'dark', 'error');
+          }
+    
+          .light-theme & {
+            border-color: map.get($colors, 'light', 'error');
+          }
+        }
+      }
+  }
+  

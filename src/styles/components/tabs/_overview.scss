@@ -1,0 +1,117 @@
+@use "sass:map";
+@use '../../abstracts/variables' as *;
+
+.company-overview {
+    padding: 20px;
+    color: map.get($colors, 'text', 'primary');
+  
+    .overview-header {
+      margin-bottom: 20px;
+  
+      .section-title {
+        font-size: map.get($font-sizes, 'md');
+        font-weight: 500;
+
+        .light-theme & {
+            color: map.get($colors, 'light', 'text');
+          }
+
+          .dark-theme & {
+            color: map.get($colors, 'dark', 'text');
+          }
+      }
+    }
+  
+    .overview-content {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+  
+      .main-description {
+        line-height: 1.4;
+        font-size: map.get($font-sizes, 'sm');
+  
+        .light-theme & {
+          color: map.get($colors, 'light', 'text');
+        }
+  
+        .dark-theme & {
+          color: map.get($colors, 'dark', 'text');
+        }
+      }
+  
+      .company-details {
+        padding-left: 20px;
+        font-size: map.get($font-sizes, 'sm');
+  
+        .detail-item {
+          margin-bottom: 10px;
+
+          &.market-cap-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .market-cap-value {
+              font-weight: normal;
+              .light-theme & {
+                color: map.get($colors, 'light', 'heading');
+              }
+              
+              .dark-theme & {
+                color: map.get($colors, 'dark', 'text');
+              }
+            }
+          }
+
+          &.website-item {
+            margin-bottom: 5px;
+          }
+  
+          .detail-label {
+            .light-theme & {
+              color: map.get($colors, 'light', 'heading');
+            }
+            
+            .dark-theme & {
+              color: map.get($colors, 'dark', 'text');
+            }
+          }
+          
+          .detail-value {
+            font-weight: bold;
+            .light-theme & {
+              color: map.get($colors, 'light', 'text');
+            }
+  
+            .dark-theme & {
+              color: map.get($colors, 'dark', 'text');
+            }
+          }
+        }
+  
+        .website-link {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          text-decoration: none;
+  
+          .light-theme & {
+            color: map.get($colors, 'primary');
+          }
+  
+          .dark-theme & {
+            color: rgba(map.get($colors, 'primary'), 0.8);
+          }
+  
+          &:hover {
+            text-decoration: underline;
+          }
+  
+          .external-link-icon {
+            font-size: 0.8em;
+          }
+        }
+      }
+    }
+  }

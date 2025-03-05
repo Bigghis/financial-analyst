@@ -1,0 +1,299 @@
+@use "sass:color";
+@use "sass:map";
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.presentation-page {
+  min-height: 100vh;
+  background: map.get(variables.$colors, 'dark', 'bg');
+  color: white;
+  @include mixins.flex(column);
+
+  .app-header {
+    width: 100%;
+    background: map.get(variables.$colors, 'dark', 'nav');
+    padding: map.get(variables.$spacers, '3') 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .logo-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 map.get(variables.$spacers, '4');
+      @include mixins.flex(row, center, flex-start);
+
+      .money-bag {
+        font-size: map.get(variables.$font-sizes, 'xl');
+        margin-right: map.get(variables.$spacers, '2');
+      }
+
+      .app-name {
+        font-size: map.get(variables.$font-sizes, 'lg');
+        font-weight: bold;
+        color: map.get(variables.$colors, 'primary');
+      }
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: map.get(variables.$spacers, '5') map.get(variables.$spacers, '4');
+    width: 100%;
+  }
+
+  .welcome-section {
+    text-align: center;
+    margin-bottom: map.get(variables.$spacers, '6');
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1 {
+      font-size: map.get(variables.$font-sizes, 'xxl');
+      margin-bottom: map.get(variables.$spacers, '3');
+      line-height: 1.2;
+
+      .highlight {
+        color: map.get(variables.$colors, 'primary');
+      }
+    }
+
+    .welcome-text {
+      font-size: map.get(variables.$font-sizes, 'lg');
+      line-height: 1.6;
+      color: map.get(variables.$colors, 'text', 'secondary');
+    }
+  }
+
+  .access-cards {
+    @include mixins.grid(1fr, map.get(variables.$spacers, '4'));
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: map.get(variables.$spacers, '6');
+  }
+
+  .access-card {
+    background: map.get(variables.$colors, 'dark', 'card');
+    padding: map.get(variables.$spacers, '4');
+    border-radius: 12px;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+      background: color.adjust(map.get(variables.$colors, 'dark', 'card'), $lightness: 3%);
+    }
+
+    &:nth-child(1) {
+      background: linear-gradient(
+        145deg,
+        map.get(variables.$colors, 'dark', 'card'),
+        color.adjust(map.get(variables.$colors, 'primary'), $alpha: -0.9)
+      );
+    }
+
+    &:nth-child(2) {
+      background: linear-gradient(
+        145deg,
+        map.get(variables.$colors, 'dark', 'card'),
+        color.adjust(map.get(variables.$colors, 'success', 'default'), $alpha: -0.9)
+      );
+    }
+
+    .card-icon {
+      font-size: map.get(variables.$font-sizes, 'xxl');
+      color: map.get(variables.$colors, 'primary');
+      margin-bottom: map.get(variables.$spacers, '3');
+    }
+
+    h2.header {
+      font-size: map.get(variables.$font-sizes, 'xl');
+      margin-bottom: map.get(variables.$spacers, '3');
+      
+      .light-theme & {
+        color: map.get(variables.$colors, 'light', 'heading');
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-theme & {
+        color: map.get(variables.$colors, 'text', 'primary');
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    p {
+      color: map.get(variables.$colors, 'text', 'secondary');
+      margin-bottom: map.get(variables.$spacers, '4');
+      line-height: 1.6;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: map.get(variables.$spacers, '4');
+
+      li {
+        @include mixins.flex(row, center, flex-start);
+        margin-bottom: map.get(variables.$spacers, '2');
+        color: map.get(variables.$colors, 'text', 'secondary');
+
+        svg {
+          color: map.get(variables.$colors, 'primary');
+          margin-right: map.get(variables.$spacers, '2');
+        }
+      }
+    }
+
+    .premium-note {
+      font-size: map.get(variables.$font-sizes, 'sm');
+      color: map.get(variables.$colors, 'text', 'muted');
+      margin-top: map.get(variables.$spacers, '3');
+    }
+  }
+
+  .why-join {
+    text-align: center;
+    padding: map.get(variables.$spacers, '6') 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    margin-bottom: map.get(variables.$spacers, '6');
+
+    h2 {
+      font-size: map.get(variables.$font-sizes, 'xl');
+      margin-bottom: map.get(variables.$spacers, '5');
+      
+      .light-theme & {
+        color: map.get(variables.$colors, 'light', 'heading');
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-theme & {
+        color: map.get(variables.$colors, 'text', 'primary');
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .benefits-grid {
+      @include mixins.grid(250px, map.get(variables.$spacers, '4'));
+      padding: 0 map.get(variables.$spacers, '4');
+    }
+
+    .benefit-item {
+      padding: map.get(variables.$spacers, '4');
+      background: map.get(variables.$colors, 'dark', 'card');
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 8px 25px rgba(0, 0, 0, 0.3),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+        background: color.adjust(map.get(variables.$colors, 'dark', 'card'), $lightness: 3%);
+      }
+
+      &:nth-child(1) {
+        background: linear-gradient(
+          145deg,
+          map.get(variables.$colors, 'dark', 'card'),
+          color.adjust(map.get(variables.$colors, 'primary'), $alpha: -0.92)
+        );
+      }
+
+      &:nth-child(2) {
+        background: linear-gradient(
+          145deg,
+          map.get(variables.$colors, 'dark', 'card'),
+          color.adjust(map.get(variables.$colors, 'success', 'default'), $alpha: -0.92)
+        );
+      }
+
+      &:nth-child(3) {
+        background: linear-gradient(
+          145deg,
+          map.get(variables.$colors, 'dark', 'card'),
+          color.adjust(map.get(variables.$colors, 'warning', 'default'), $alpha: -0.92)
+        );
+      }
+
+      &:nth-child(4) {
+        background: linear-gradient(
+          145deg,
+          map.get(variables.$colors, 'dark', 'card'),
+          color.adjust(map.get(variables.$colors, 'info', 'default'), $alpha: -0.92)
+        );
+      }
+
+      .benefit-icon {
+        font-size: map.get(variables.$font-sizes, 'xl');
+        color: map.get(variables.$colors, 'primary');
+        margin-bottom: map.get(variables.$spacers, '3');
+      }
+
+      h3 {
+        font-size: map.get(variables.$font-sizes, 'lg');
+        margin-bottom: map.get(variables.$spacers, '2');
+        
+        .light-theme & {
+          color: map.get(variables.$colors, 'light', 'heading');
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme & {
+          color: map.get(variables.$colors, 'text', 'primary');
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      p {
+        color: map.get(variables.$colors, 'text', 'secondary');
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .app-footer {
+    width: 100%;
+    text-align: center;
+    padding: map.get(variables.$spacers, '4');
+    background: map.get(variables.$colors, 'dark', 'nav');
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    p {
+      margin-bottom: map.get(variables.$spacers, '2');
+    }
+
+    small {
+      display: block;
+      color: map.get(variables.$colors, 'text', 'muted');
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+  }
+
+  @include mixins.breakpoint('sm') {
+    .welcome-section {
+      h1 {
+        font-size: map.get(variables.$font-sizes, 'xl');
+      }
+    }
+
+    .access-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

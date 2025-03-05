@@ -1,0 +1,26 @@
+.simple-chart {
+    width: 100%;
+    background: transparent;
+    .hover-info {
+        padding: 8px;
+        font-size: 14px;
+        color: #666;
+
+        span {
+            margin-right: 10px; 
+            
+            &:last-child {
+              margin-right: 0;  
+            }
+          }
+      }
+      
+      .crosshair {
+        pointer-events: none;
+      }
+      
+      .hover-label {
+        pointer-events: none;
+      }
+  }
+

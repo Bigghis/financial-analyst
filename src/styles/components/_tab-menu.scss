@@ -1,0 +1,97 @@
+@use "sass:map";
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../components/tabs/overview' as *;
+@use '../components/tabs/valuation' as *;
+
+.tab-menu {
+  // margin-top: 60px;
+  width: 100%;
+}
+
+.tab-buttons {
+  @include flex(row, center, flex-start);
+  gap: 1px;
+  background: map.get($colors, 'dark', 'bg');
+  padding: 0 map.get($spacers, '2');
+  border-bottom: 1px solid map.get($colors, 'dark', 'card');
+
+  .light-theme & {
+    background: map.get($colors, 'light', 'nav');
+    border-bottom: 1px solid map.get($colors, 'light', 'border');
+
+    h2 {
+      color: map.get($colors, 'light', 'heading');
+    }
+    
+  }
+}
+
+.tab-button {
+  padding: map.get($spacers, '2') map.get($spacers, '3');
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: map.get($font-sizes, 'sm');
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    color: map.get($colors, 'primary');
+  }
+
+  &.active {
+    color: map.get($colors, 'primary');
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: map.get($colors, 'primary');
+    }
+  }
+
+  .light-theme & {
+    color: #666;
+
+    &:hover,
+    &.active {
+      color: map.get($colors, 'primary');
+    }
+  }
+}
+
+.tab-content {
+  padding: map.get($spacers, '1') map.get($spacers, '3');
+}
+
+.tab-pane {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@include breakpoint('sm') {
+  .tab-buttons {
+    padding: 0;
+  }
+  
+  .tab-button {
+    padding: 0.75rem map.get($spacers, '2');
+    font-size: map.get($font-sizes, 'sm');
+  }
+} 

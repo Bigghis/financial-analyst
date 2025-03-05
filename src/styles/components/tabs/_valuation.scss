@@ -1,0 +1,19 @@
+@use "sass:map";
+@use '../../abstracts/variables' as *;
+
+
+.valuation-method-container {
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+    .main-row {
+        .select-header, 
+        input {
+            max-width: 200px;
+        }
+
+        .select-options {
+            max-width: 200px;
+        }
+    }
+}

@@ -1,0 +1,65 @@
+// Abstracts
+@use "sass:map";
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+// Base
+@use 'base/reset';
+
+// Components
+@use 'components/buttons';
+@use 'components/presentation';
+@use 'components/tab-menu';
+@use 'components/navigation';
+@use 'components/panels/header-panel';
+@use 'components/settings-menu';
+@use 'components/tables/table';
+@use 'components/tooltip';
+@use 'components/_market_cap_category';
+@use 'components/screener/_screener';
+
+
+@use 'ui/_select';
+@use 'ui/_filter-input';
+@use 'ui/_input';
+
+// Themes
+@use 'themes/themes';
+
+.app-container {
+    display: block;
+    // min-height: 100vh;
+    padding-top: 60px; // Height of the navigation bar
+    width: 100%;
+    position: relative;
+  }
+  
+  .main-content {
+    display: block;
+    width: 100%;
+    // min-height: calc(100vh - 60px); // Subtract nav height
+    padding: 0;
+  
+    // @include breakpoint('lg') {
+    //   padding: map.get($spacers, '2');
+    // }
+
+    .main-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+      
+      @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  } 

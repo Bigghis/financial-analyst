@@ -1,0 +1,183 @@
+@use "sass:map";
+@use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins' as *;
+
+@use '../charts/stock-chart';
+@use '../charts/simple-chart';
+@use '../charts/multi-line-chart';
+@use './data_summary';
+
+.header-panel {
+    padding: 0.5rem 1.5rem;
+    // margin-top: 60px;
+    // border-radius: 8px;
+    // margin-bottom: 1rem;
+  
+    .light-theme & {
+      background-color: map.get(map.get($colors, 'light'), 'bg');
+      border: 1px solid map.get(map.get($colors, 'light'), 'border');
+    }
+  
+    .dark-theme & {
+      background-color: map.get(map.get($colors, 'dark'), 'card');
+      border: 1px solid map.get(map.get($colors, 'dark'), 'border');
+    }
+  
+    .asset-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+  
+      .asset-primary-info {
+        .asset-name {
+          font-size: map.get($font-sizes, 'xl');
+          font-weight: 600;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+  
+          .asset-ticker {
+            font-size: map.get($font-sizes, 'md');
+            opacity: 0.7;
+          }
+        }
+        .asset-industry,
+        .asset-exchange {
+          font-size: map.get($font-sizes, 'sm');
+          opacity: 0.7;
+        }
+      }
+  
+      .asset-price-info {
+        text-align: right;
+  
+        .current-price {
+          font-size: map.get($font-sizes, 'md');
+          font-weight: 600;
+          margin-bottom: 1rem;
+        }
+  
+        .price-change {
+          font-size: map.get($font-sizes, 'md');
+  
+          &.positive {
+            color: map.get(map.get($colors, 'success'), 'default');
+          }
+  
+          &.negative {
+            color: map.get(map.get($colors, 'danger'), 'default');
+          }
+  
+          .change-percentage {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+
+      .toggle-chart-container {
+        display: flex;
+        justify-content: flex-end;
+
+        .toggle-chart-button {
+          display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        .light-theme & {
+          background-color: map.get(map.get($colors, 'light'), 'bg');
+          border-color: map.get(map.get($colors, 'light'), 'border');
+          color: map.get(map.get($colors, 'light'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'light'), 'hover');
+          }
+        }
+
+        .dark-theme & {
+          background-color: map.get(map.get($colors, 'dark'), 'card');
+          border-color: map.get(map.get($colors, 'dark'), 'border');
+          color: map.get(map.get($colors, 'dark'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'dark'), 'hover');
+          }
+        }
+
+        svg {
+          font-size: map.get($font-sizes, 'base');
+          }
+        }
+      }
+
+    }
+  
+    .asset-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid;
+  
+      .light-theme & {
+        border-color: map.get(map.get($colors, 'light'), 'border');
+      }
+  
+      .dark-theme & {
+        border-color: map.get(map.get($colors, 'dark'), 'border');
+      }
+  
+      .metric {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+  
+        .metric-label {
+          font-size: map.get($font-sizes, 'sm');
+          opacity: 0.7;
+        }
+  
+        .metric-value {
+          font-size: map.get($font-sizes, 'md');
+          font-weight: 500;
+        }
+      }
+    }
+
+    .chart-container {
+      margin-top: 1.5rem;
+      border-top: 1px solid;
+      padding-top: 1.5rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+
+      > div {
+        width: 50%;
+      }
+
+      @media screen and (max-width: 1200px) {
+        flex-direction: column;
+
+        > div {
+          width: 100%;
+        }
+      }
+  
+      .light-theme & {
+        border-color: map.get(map.get($colors, 'light'), 'border');
+      }
+  
+      .dark-theme & {
+        border-color: map.get(map.get($colors, 'dark'), 'border');
+      }
+    }
+
+  }

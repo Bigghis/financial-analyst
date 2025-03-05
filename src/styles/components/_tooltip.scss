@@ -1,0 +1,79 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.tooltip {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    animation: tooltip-fade-in 0.2s ease-in-out;
+
+    .tooltip-content {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        max-width: 250px;
+        word-wrap: break-word;
+        white-space: pre-line;
+    }
+
+    .tooltip-arrow {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.85);
+        transform: rotate(45deg);
+    }
+
+    // Position variants
+    &.top .tooltip-arrow {
+        bottom: -4px;
+        left: 50%;
+        margin-left: -4px;
+    }
+
+    &.bottom .tooltip-arrow {
+        top: -4px;
+        left: 50%;
+        margin-left: -4px;
+    }
+
+    &.left .tooltip-arrow {
+        right: -4px;
+        top: 50%;
+        margin-top: -4px;
+    }
+
+    &.right .tooltip-arrow {
+        left: -4px;
+        top: 50%;
+        margin-top: -4px;
+    }
+}
+
+// Animation
+@keyframes tooltip-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Dark theme support
+.dark-theme {
+    .tooltip {
+        .tooltip-content {
+            background-color: rgba(255, 255, 255, 0.85);
+            color: black;
+        }
+
+        .tooltip-arrow {
+            background: rgba(255, 255, 255, 0.85);
+        }
+    }
+} 

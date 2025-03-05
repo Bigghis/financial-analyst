@@ -1,0 +1,16 @@
+@use "sass:map";
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.market-cap-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .category-label {
+        font-weight: 600;
+        font-size: map.get($font-sizes, 'sm');
+        text-transform: uppercase;
+        margin-right: 0.25rem;
+    }
+} 

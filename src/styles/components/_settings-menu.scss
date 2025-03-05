@@ -1,0 +1,184 @@
+@use "sass:map";
+@use "sass:color";
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Overlay
+.settings-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 1100;
+}
+
+// Main menu container
+.settings-menu {
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1200;
+  transition: all 0.3s ease;
+
+  &.light-theme {
+    background-color: map.get($colors, 'light', 'nav');
+    color: map.get($colors, 'light', 'text');
+    border: 1px solid map.get($colors, 'light', 'border');
+  }
+
+  &.dark-theme {
+    background-color: map.get($colors, 'dark', 'nav');
+    color: map.get($colors, 'text', 'primary');
+    border: 1px solid map.get($colors, 'dark', 'border');
+  }
+
+  .logout-button {
+    padding: map.get($spacers, '1') map.get($spacers, '2');
+    background-color: map.get($colors, 'danger', 'default');
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: map.get($font-sizes, 'base');
+    width: auto;
+
+    &:hover {
+      background-color: map.get($colors, 'danger', 'hover');
+    }
+  }
+}
+
+// Menu items
+.menu-item {
+  @include flex(row, center, space-between);
+  padding: map.get($spacers, '2') map.get($spacers, '3');
+  cursor: pointer;
+
+  .light-theme & {
+    &:hover {
+      background-color: map.get($colors, 'light', 'hover');
+    }
+  }
+
+  .dark-theme & {
+    &:hover {
+      background-color: map.get($colors, 'dark', 'hover');
+    }
+  }
+}
+
+// Divider
+.menu-divider {
+  height: 1px;
+  margin: 8px 0;
+
+  .light-theme & {
+    background-color: map.get($colors, 'light', 'border');
+  }
+
+  .dark-theme & {
+    background-color: map.get($colors, 'dark', 'border');
+  }
+}
+
+// Menu icon
+.menu-icon {
+  color: #666;
+}
+
+// Toggle Switch
+.toggle {
+  &-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &:checked + .toggle-slider {
+        background-color: #ff9800;
+
+        &:before {
+          transform: translateX(20px);
+        }
+      }
+    }
+  }
+
+  &-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+}
+
+// Theme-specific styles
+.logo-text {
+  .dark-theme & {
+    color: map.get($colors, 'primary');
+  }
+
+  .light-theme & {
+    color: map.get($colors, 'light', 'text');
+  }
+}
+
+.settings-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  .dark-theme & {
+    color: #8ab4f8;
+  }
+
+  .light-theme & {
+    color: darkolivegreen;
+  }
+}
+
+button {
+  &:hover {
+    &:not(.logout-button) {
+      .light-theme & {
+        background-color: map.get($colors, 'light', 'hover');
+      }
+
+      .dark-theme & {
+        background-color: map.get($colors, 'dark', 'hover');
+      }
+    }
+  }
+}
+
+.format-buttons {
+  display: flex;
+  gap: 8px;
+}
+

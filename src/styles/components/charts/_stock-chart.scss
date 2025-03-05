@@ -1,0 +1,317 @@
+@use "sass:map";
+@use '../../abstracts/variables' as *;
+@use '../../abstracts/mixins' as *;
+
+.stock-chart {
+  padding: 1rem;
+  border-radius: 8px;
+
+  .light-theme & {
+    background-color: map.get(map.get($colors, 'light'), 'bg');
+    border: 1px solid map.get(map.get($colors, 'light'), 'border');
+  }
+
+  .dark-theme & {
+    background-color: map.get(map.get($colors, 'dark'), 'card');
+    border: 1px solid map.get(map.get($colors, 'dark'), 'border');
+  }
+
+  .chart-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .range-buttons {
+      display: flex;
+      gap: 0.25rem;
+
+      .range-button {
+        padding: 0.5rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        .light-theme & {
+          border-color: map.get(map.get($colors, 'light'), 'border');
+          background-color: map.get(map.get($colors, 'light'), 'bg');
+          color: map.get(map.get($colors, 'light'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'light'), 'hover');
+          }
+
+          &.active {
+            background-color: map.get($colors, 'primary');
+            color: white;
+            border-color: map.get($colors, 'primary');
+          }
+        }
+
+        .dark-theme & {
+          border-color: map.get(map.get($colors, 'dark'), 'border');
+          background-color: map.get(map.get($colors, 'dark'), 'card');
+          color: map.get(map.get($colors, 'dark'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'dark'), 'hover');
+          }
+
+          &.active {
+            background-color: map.get($colors, 'primary');
+            color: white;
+            border-color: map.get($colors, 'primary');
+          }
+        }
+      }
+    }
+
+    .chart-type-buttons {
+      display: flex;
+      gap: 0.25rem;
+
+      .type-button {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        .light-theme & {
+          border-color: map.get(map.get($colors, 'light'), 'border');
+          background-color: map.get(map.get($colors, 'light'), 'bg');
+          color: map.get(map.get($colors, 'light'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'light'), 'hover');
+          }
+
+          &.active {
+            background-color: map.get($colors, 'primary');
+            color: white;
+            border-color: map.get($colors, 'primary');
+          }
+        }
+
+        .dark-theme & {
+          border-color: map.get(map.get($colors, 'dark'), 'border');
+          background-color: map.get(map.get($colors, 'dark'), 'card');
+          color: map.get(map.get($colors, 'dark'), 'text');
+
+          &:hover {
+            background-color: map.get(map.get($colors, 'dark'), 'hover');
+          }
+
+          &.active {
+            background-color: map.get($colors, 'primary');
+            color: white;
+            border-color: map.get($colors, 'primary');
+          }
+        }
+      }
+    }
+
+    .percentage-change {
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      
+      .light-theme & {
+        background-color: map.get(map.get($colors, 'light'), 'hover');
+      }
+
+      .dark-theme & {
+        background-color: map.get(map.get($colors, 'dark'), 'hover');
+      }
+    }
+  }
+
+  // .chart-tooltip {
+  //   display: inline-block; // Add this
+  //   visibility: visible; // Add this
+  //   padding: 8px 12px;
+  //   border-radius: 4px;
+  //   pointer-events: none;
+  //   font-size: map.get($font-sizes, 'sm');
+  //   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  //   background: rgba(0, 0, 0, 0.8);
+  //   color: white;
+  //   padding: 5px 10px;
+  //   border-radius: 4px;
+  //   pointer-events: none;
+  //   white-space: nowrap;
+    
+  //   .light-theme & {
+  //     background-color: rgba(255, 255, 255, 0.95);
+  //     border: 1px solid map.get(map.get($colors, 'light'), 'border');
+  //     color: map.get(map.get($colors, 'light'), 'text');
+  //   }
+
+  //   .dark-theme & {
+  //     background-color: rgba(33, 33, 33, 0.95);
+  //     border: 1px solid map.get(map.get($colors, 'dark'), 'border');
+  //     color: map.get(map.get($colors, 'dark'), 'text');
+  //   }
+
+  //   .tooltip-date {
+  //     font-weight: 600;
+  //     margin-bottom: 4px;
+  //     padding-bottom: 4px;
+  //     border-bottom: 1px solid;
+
+  //     .light-theme & {
+  //       border-color: map.get(map.get($colors, 'light'), 'border');
+  //     }
+
+  //     .dark-theme & {
+  //       border-color: map.get(map.get($colors, 'dark'), 'border');
+  //     }
+  //   }
+
+  //   .tooltip-price {
+  //     position: relative;
+  //     font-size: 12px;
+  //     color: #999;
+  //     display: flex;
+  //     justify-content: space-between;
+  //     gap: 12px;
+  //     line-height: 1.5;
+
+  //     .label {
+  //       opacity: 0.7;
+  //     }
+
+  //     .value {
+  //       font-weight: 500;
+  //     }
+  //   }
+  // }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .y-axis,
+  .volume-axis {
+    text {
+      fill: currentColor;
+      font-size: 12px;
+    }
+  }
+
+  .grid {
+    line {
+      .light-theme & {
+        stroke: rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-theme & {
+        stroke: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    path {
+      stroke: none;
+    }
+  }
+
+  .volume-axis {
+    .domain,
+    .tick line {
+      .light-theme & {
+        stroke: rgba(0, 0, 0, 0.2);
+      }
+
+      .dark-theme & {
+        stroke: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .price-label {
+    font-size: 15px;
+    font-weight: 500;
+
+    .light-theme & {
+      fill: rgba(0, 0, 0, 0.7);
+    }
+
+    .dark-theme & {
+      fill: rgba(255, 255, 255, 0.7);
+    }
+
+    &.max-price text {
+      fill: #26a69a;
+    }
+
+    &.min-price text {
+      fill: #ef5350;
+    }
+  }
+
+  .price-line {
+    .light-theme & {
+      stroke: rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-theme & {
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .date-label {
+    font-size: 11px;
+    
+    .light-theme & {
+      fill: rgba(0, 0, 0, 0.5);
+    }
+
+    .dark-theme & {
+      fill: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .data-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    // margin-bottom: 1rem;
+    padding-left: 1.75rem;
+    // border-radius: 4px;
+    font-size: map.get($font-sizes, 'sm');
+
+    // .light-theme & {
+    //   background-color: rgba(0, 0, 0, 0.03);
+    //   border: 1px solid map.get(map.get($colors, 'light'), 'border');
+    // }
+
+    // .dark-theme & {
+    //   background-color: rgba(255, 255, 255, 0.03);
+    //   border: 1px solid map.get(map.get($colors, 'dark'), 'border');
+    // }
+
+    .summary-item {
+      display: flex;
+      gap: 0.5rem;
+      
+      .label {
+        opacity: 0.7;
+      }
+      
+      .value {
+        font-weight: 500;
+      }
+    }
+
+    .summary-placeholder {
+      width: 100%;
+      text-align: center;
+      opacity: 0.5;
+    }
+  }
+} 
+

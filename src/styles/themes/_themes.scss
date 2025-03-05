@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "../abstracts/variables" as *;
+
+// Theme CSS Variables
+:root {
+  // Light theme variables
+  --light-bg: #{map.get($colors, 'light', 'bg')};
+  --light-text: #{map.get($colors, 'light', 'text')};
+  --light-nav-bg: #{map.get($colors, 'light', 'nav')};
+  --light-input-bg: #{map.get($colors, 'light', 'bg')};
+  --light-border: #{map.get($colors, 'light', 'border')};
+  --light-hover: #{map.get($colors, 'light', 'hover')};
+  
+  // Dark theme variables
+  --dark-bg: #{map.get($colors, 'dark', 'bg')};
+  --dark-text: #{map.get($colors, 'text', 'primary')};
+  --dark-nav-bg: #{map.get($colors, 'dark', 'nav')};
+  --dark-input-bg: #{map.get($colors, 'dark', 'input')};
+  --dark-border: #{map.get($colors, 'dark', 'border')};
+  --dark-hover: #{map.get($colors, 'dark', 'hover')};
+}
+
+// Theme classes
+.light-theme {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+.dark-theme {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}

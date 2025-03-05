@@ -1,0 +1,164 @@
+@use "sass:map";
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.select-container {
+    position: relative;
+    width: 100%;
+    max-width: inherit;
+    font-size: 14px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+
+    label {
+      color: map.get($colors, 'dark', 'text-secondary');
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .light-theme & {
+        color: map.get($colors, 'light', 'text-secondary');
+      }
+    }
+
+    > * {
+        width: inherit;
+    }
+  }
+  
+  .select-header {
+    background-color: map.get($colors, 'light', 'input');
+    border: 1px solid map.get($colors, 'light', 'border');
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: map.get($font-sizes, 'sm');
+    color: map.get($colors, 'light', 'text');
+
+    .dark-theme & {
+        background-color: map.get($colors, 'dark', 'input');
+        color: map.get($colors, 'dark', 'text');
+        border: 1px solid map.get($colors, 'dark', 'border');
+    }
+
+    &:hover {
+        border-color: map.get($colors, 'light', 'hover');
+        
+        .dark-theme & {
+            border-color: map.get($colors, 'dark', 'hover');
+        }
+    }
+
+    &.open {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+  }
+  
+  .select-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .select-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    color: map.get($colors, 'light', 'text-secondary');
+
+    .dark-theme & {
+        color: map.get($colors, 'dark', 'text-secondary');
+    }
+  }
+  
+  .select-arrow.open {
+    transform: rotate(180deg);
+  }
+  
+  .select-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: inherit;
+    box-sizing: border-box;
+    border: 1px solid map.get($colors, 'light', 'border');
+    border-top: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    background-color: map.get($colors, 'light', 'input');
+    font-size: map.get($font-sizes, 'sm');
+    color: map.get($colors, 'light', 'text');
+
+    .dark-theme & {
+        background-color: map.get($colors, 'dark', 'input');
+        color: map.get($colors, 'dark', 'text');
+        border-color: map.get($colors, 'dark', 'border');
+    }
+  }
+  
+  .select-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: map.get($colors, 'light', 'text');
+
+    .dark-theme & {
+        color: map.get($colors, 'dark', 'text');
+    }
+
+    &:hover {
+        background-color: map.get($colors, 'light', 'hover');
+
+        .dark-theme & {
+            background-color: map.get($colors, 'dark', 'hover');
+        }
+    }
+
+    &.selected {
+        background-color: map.get($colors, 'light', 'bg-secondary');
+
+        .dark-theme & {
+            background-color: map.get($colors, 'dark', 'bg-secondary');
+        }
+    }
+  }
+  
+  /* Scrollbar styling */
+  .select-options::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .select-options::-webkit-scrollbar-track {
+    background: map.get($colors, 'light', 'bg-secondary');
+
+    .dark-theme & {
+        background: map.get($colors, 'dark', 'bg-secondary');
+    }
+  }
+  
+  .select-options::-webkit-scrollbar-thumb {
+    background: map.get($colors, 'light', 'border');
+    border-radius: 4px;
+
+    .dark-theme & {
+        background: map.get($colors, 'dark', 'border');
+    }
+
+    &:hover {
+        background: map.get($colors, 'light', 'text-secondary');
+
+        .dark-theme & {
+            background: map.get($colors, 'dark', 'text-secondary');
+        }
+    }
+  }

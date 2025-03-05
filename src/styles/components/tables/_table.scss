@@ -1,0 +1,454 @@
+@use 'cells/range';
+
+@use "sass:map";
+@use "../../abstracts/variables" as *;
+
+.table-section {
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    .light-theme & {
+      color: #333; 
+    }
+    .dark-theme & {
+      color: #fff; 
+    }
+  }
+
+  .table-container {
+    position: relative;
+    min-height: 200px;
+    overflow-x: auto;
+
+    .operation-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+
+        svg {
+            .operation-line {
+                stroke-width: 2;
+                fill: none;
+                
+                &.adding {
+                    stroke: green;
+                }
+                
+                &.subtracting {
+                    stroke: red;
+                }
+                
+                &.dividing {
+                    stroke: blue;
+                }
+            }
+        }
+    }
+  }
+
+  .table-loader {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .loader-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .table-content {
+    transition: opacity 0.2s ease;
+    
+    &.loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+
+  @keyframes spin {
+    0% { 
+      transform: rotate(0deg); 
+    }
+    100% { 
+      transform: rotate(360deg); 
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+      &:first-child {
+        padding-left: 1rem;
+      }
+      // &:last-child {
+      //   padding-right: 1rem;
+      // }
+    }
+
+    th, td {
+      // padding: 0.75rem 1rem;
+      padding: 0.25rem;
+      text-align: right;
+
+      &.left {
+        text-align: left;
+      }
+
+      &.right {
+        text-align: right;
+      }
+
+      &.center {
+        text-align: center;
+      }
+    }
+
+    th {
+      position: relative;
+      user-select: none;
+      background-color: #f9fafb;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+      font-size: 0.75rem;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+      // text-align: right;
+
+      .sign {
+        margin-left: 3px;
+      } 
+    }
+
+
+    tbody tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .separator-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+  }
+
+
+
+    &.show-operations{ 
+      td:has(> div.calc) {
+        border-bottom: unset;
+      }
+    
+      .adding, .subtracting, .dividing {
+        &-1, &-2, &-result {
+          &.adjacent {
+            .sign {
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+
+      $operation-colors: (
+        'adding': green,
+        'subtracting': red,
+        'dividing': blue
+      );
+
+      @each $operation, $color in $operation-colors {
+        .#{$operation}-1, .#{$operation}-2, .#{$operation}-result {
+          &.adjacent {
+            border-right: 2px solid $color;
+            .sign {
+              color: $color;
+            }
+          }
+
+          @if $operation != 'dividing' {
+            .wrap {
+              border: 1px solid $color;
+            }
+          }
+        }
+
+        .#{$operation}-result {
+          &.adjacent {
+            position: relative;
+            
+            &::after {
+              content: '';
+              position: absolute;
+              left: 20%;
+              right: 0%;
+              top: -1px;
+              height: 2px;
+              background-color: $color;
+              box-shadow: 0 100% 0 $color;
+            }
+
+            .calc {
+              padding-right: 0.75rem;
+            }
+          }
+        }
+      }
+
+      // Add specific styling for result rows
+      tr.result-row {
+        &.light-theme {
+          background-color: #f8f9fa;  // Light gray background
+        }
+        &.dark-theme {
+          background-color: #1f2937;  // Dark gray background
+        }
+        font-weight: 700; 
+        
+        td {
+          border-bottom: none;  // Remove bottom border since we have empty-row
+        }
+      }
+  
+      // Style for the empty row after results
+      .empty-row td {
+        height: 0.75rem;
+        border: none;
+       // background-color: white;  // Ensure empty row is white
+      }
+
+      td .wrap { 
+          display: inline-block;
+          padding: 0 0 0 15px;
+          border-radius: 5px;
+      }
+
+      td.adding-1, td.adding-2, td.adding-result { 
+        .wrap {
+          border: 1px solid green;
+        }
+      }
+
+      td.subtracting-1, td.subtracting-2, td.subtracting-result { 
+        .wrap {
+          border: 1px solid red;
+        }
+      }
+    }
+
+    // Add relative positioning to the table for SVG overlay
+    position: relative;
+
+    // Container for SVG lines
+    .operation-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; // Allow clicks to pass through
+      z-index: 2;
+
+      svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        line {
+          &.operation-line {
+            stroke-width: 2;
+            
+            &.addition {
+              stroke: green;
+            }
+            
+            &.subtraction {
+              stroke: red;
+            }
+            
+            &.division {
+              stroke: blue;
+            }
+          }
+        }
+      }
+    }
+
+    // Ensure cells are positioned relative to the SVG
+    td {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .no-data {
+    color: #6b7280;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.5rem;
+  }
+
+  .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+  }
+
+  .pagination-controls button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .pagination-controls button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+  }
+
+  .page-size-selector select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  .tooltip-container {
+    // display: flex;
+    // align-items: center;
+
+    .label {
+        &.tooltip-trigger {
+            cursor: help;
+            border-bottom: 1px dotted currentColor;
+        }
+    }
+  }
+
+  td.top {
+    border-top: 3px double #000;
+  }
+
+}
+
+.settings-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .group-label {
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .buttons-container select {
+      // padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      // margin-top: 0.5rem;
+    }
+}
+
+.operations-container {
+  margin-bottom: 1rem;
+  
+  .operations-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.active {
+      background-color: #e5e7eb;
+      border-color: #9ca3af;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    // &:hover {
+    //   background-color: #f9fafb;
+    // }
+  }
+}
+
+.operation-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .operation-line {
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .operation-text {
+      font-size: 12px;
+      font-family: monospace;
+    }
+
+    @each $operation, $color in (
+      'adding': green,
+      'subtracting': red,
+      'dividing': blue
+    ) {
+      .operation-line.#{$operation} {
+        stroke: $color;
+      }
+      .operation-text.#{$operation} {
+        fill: $color;
+      }
+    }
+  }
+}

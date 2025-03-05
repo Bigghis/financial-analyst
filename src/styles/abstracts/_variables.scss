@@ -1,0 +1,75 @@
+// Colors
+$colors: (
+  'primary': #1e90ff,
+  'danger': (
+    'default': #dc3545,
+    'hover': #c82333
+  ),
+  'light': (
+    'bg': #ffffff,
+    'text': #333333,
+    'nav': #f5f5f5,
+    'input': #ffffff,
+    'border': #e0e0e0,
+    'hover': rgba(0, 0, 0, 0.05),
+    'heading': #2c3e50,
+    'error': #ff4d4f,
+    'text-secondary': #666666,
+    'bg-secondary': #f5f5f5
+  ),
+  'dark': (
+    'bg': #2d2d2d,
+    'text': #ffffff,
+    'nav': #202020,
+    'input': rgba(50, 55, 65, 1),
+    'border': rgba(255, 255, 255, 0.1),
+    'hover': rgba(255, 255, 255, 0.1),
+    'card': #1a1a1a,
+    'error': #ff4d4f,
+    'text-secondary': #a6a6a6,
+    'bg-secondary': #363636
+  ),
+  'text': (
+    'primary': #ffffff
+  ),
+  'success': (
+    'default': #4CAF50,
+    'hover': #45a049
+  ),
+  'warning': (
+    'default': #ff9800,
+    'hover': #f57c00
+  ),
+  'info': (
+    'default': #03a9f4,
+    'hover': #0288d1
+  )
+);
+
+// Typography
+$font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+$font-sizes: (
+  'mini': 0.3rem,
+  'sm': 0.7rem,
+  'base': 1rem,
+  'md': 1.25rem,
+  'lg': 1.5rem,
+  'xl': 2rem,
+  'xxl': 2.5rem,
+  'huge': 3.2em
+);
+
+// Spacing
+$spacers: (
+  '1': 0.5rem,
+  '2': 1rem,
+  '3': 1.5rem,
+  '4': 2rem,
+  '5': 3rem
+);
+
+// Breakpoints
+$breakpoints: (
+  'sm': 768px,
+  'lg': 1200px
+);
