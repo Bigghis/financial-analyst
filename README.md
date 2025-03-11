@@ -11,3 +11,21 @@ This is the frontend part of the application.
 - **SWOT Analysis**: To be implemented... (AI generated)
 - **Risk Analysis**: To be implemented... (AI generated)
 - **Comparative Analysis**: To be implemented... (AI generated)
+
+
+## Examples 
+
+### Income Statement Qualitative Analysis:
+
+![Demo GIF](./docs/analysisIncome.gif)
+
+### Balance Sheet Qualitative Analysis:
+
+![Demo GIF](./docs/analysisBalance.gif) 
+
+### Cash Flow Analysis:
+
+![Demo GIF](./docs/cashFlow.gif)
+
+
+
